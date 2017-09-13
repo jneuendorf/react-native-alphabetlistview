@@ -399,4 +399,9 @@ SelectableSectionsListView.propTypes = {
    * Selector styles
    */
   sectionListFontStyle: stylesheetProp,
+
+  /**
+   * A RefreshControl element that will be passed to the underlying ListView.
+   */
+  refreshControl: PropTypes.element,
 };
