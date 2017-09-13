@@ -205,7 +205,7 @@ export default class SelectableSectionsListView extends Component {
   }
 
   render() {
-    const { data } = this.props;
+    const { data, refreshControl } = this.props;
     const dataIsArray = Array.isArray(data);
     let sectionList;
     let renderSectionHeader;
@@ -259,6 +259,7 @@ export default class SelectableSectionsListView extends Component {
       <View ref="view" style={[styles.container, this.props.style]}>
         <ListView
           ref="listview"
+          refreshControl={refreshControl}
           {...props}
         />
         {sectionList}
