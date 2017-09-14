@@ -11,9 +11,9 @@ import ReactNative, {
   NativeModules,
 } from 'react-native';
 
-const { UIManager } = NativeModules;
+// const { UIManager } = NativeModules;
 
-const noop = () => {};
+// const noop = () => {};
 const returnTrue = () => true;
 
 export default class SectionList extends Component {
@@ -21,19 +21,20 @@ export default class SectionList extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.onSectionSelect = this.onSectionSelect.bind(this);
+    // this.onSectionSelect = this.onSectionSelect.bind(this);
     this.resetSection = this.resetSection.bind(this);
     this.detectAndScrollToSection = this.detectAndScrollToSection.bind(this);
     this.lastSelectedIndex = null;
+    this.measure = {}
   }
 
-  onSectionSelect(sectionId, fromTouch) {
-    this.props.onSectionSelect && this.props.onSectionSelect(sectionId);
-
-    if (!fromTouch) {
-      this.lastSelectedIndex = null;
-    }
-  }
+  // onSectionSelect(sectionId, fromTouch) {
+  //   this.props.onSectionSelect && this.props.onSectionSelect(sectionId);
+  //
+  //   if (!fromTouch) {
+  //     this.lastSelectedIndex = null;
+  //   }
+  // }
 
   resetSection() {
     this.lastSelectedIndex = null;
@@ -65,39 +66,39 @@ export default class SectionList extends Component {
     index = Math.min(index, this.props.sections.length - 1);
     if (this.lastSelectedIndex !== index && this.props.data[this.props.sections[index]].length) {
       this.lastSelectedIndex = index;
-      this.onSectionSelect(this.props.sections[index], true);
+    //   this.onSectionSelect(this.props.sections[index], true);
     }
   }
 
-  fixSectionItemMeasure() {
-    const sectionItem = this.refs.sectionItem0;
-    if (!sectionItem) {
-      return;
-    }
-    this.measureTimer = setTimeout(() => {
-      sectionItem.measure((x, y, width, height, pageX, pageY) => {
-        //console.log([x, y, width, height, pageX, pageY]);
-        this.measure = {
-          y: pageY,
-          width,
-          height
-        };
-      })
-    }, 0);
-  }
+  // fixSectionItemMeasure() {
+  //   const sectionItem = this.refs.sectionItem0;
+  //   if (!sectionItem) {
+  //     return;
+  //   }
+  //   // this.measureTimer = setTimeout(() => {
+  //   // //   sectionItem.measure((x, y, width, height, pageX, pageY) => {
+  //   // //     //console.log([x, y, width, height, pageX, pageY]);
+  //   // //     this.measure = {
+  //   // //       y: pageY,
+  //   // //       width,
+  //   // //       height
+  //   // //     };
+  //   // //   })
+  //   // }, 0);
+  // }
 
-  componentDidMount() {
-    this.fixSectionItemMeasure();
-  }
+  // componentDidMount() {
+  //   this.fixSectionItemMeasure();
+  // }
+  //
+  // // fix bug when change data
+  // componentDidUpdate() {
+  //   this.fixSectionItemMeasure();
+  // }
 
-  // fix bug when change data 
-  componentDidUpdate() {
-    this.fixSectionItemMeasure();
-  }
-
-  componentWillUnmount() {
-    this.measureTimer && clearTimeout(this.measureTimer);
-  }
+  // componentWillUnmount() {
+  //   this.measureTimer && clearTimeout(this.measureTimer);
+  // }
 
   render() {
     const SectionComponent = this.props.component;
