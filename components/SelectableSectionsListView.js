@@ -11,7 +11,6 @@ import ReactNative, {
   View,
   NativeModules,
 } from 'react-native';
-import merge from 'merge';
 
 import SectionHeader from './SectionHeader';
 import SectionList from './SectionList';
@@ -243,7 +242,7 @@ export default class SelectableSectionsListView extends Component {
       this.renderHeader :
       this.props.renderHeader;
 
-    const props = merge({}, this.props, {
+    const props = Object.assign({}, this.props, {
       onScroll: this.onScroll,
       onScrollAnimationEnd: this.onScrollAnimationEnd,
       dataSource,
