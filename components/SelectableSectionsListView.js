@@ -2,9 +2,9 @@
 /* jshint esnext: true */
 
 import React, {
-  Component,
-  PropTypes,
+  Component
 } from 'react';
+import PropTypes from 'prop-types';
 import ReactNative, {
   ListView,
   StyleSheet,
@@ -55,7 +55,7 @@ export default class SelectableSectionsListView extends Component {
   componentDidMount() {
     // push measuring into the next tick
     setTimeout(() => {
-      UIManager.measure(ReactNative.findNodeHandle(this.refs.view), (x,y,w,h) => {
+      UIManager.measure(ReactNative.findNodeHandle(this.view), (x,y,w,h) => {
         this.containerHeight = h;
       });
     }, 0);
@@ -119,11 +119,11 @@ export default class SelectableSectionsListView extends Component {
       const maxY = this.totalHeight - this.containerHeight + headerHeight;
       y = y > maxY ? maxY : y;
 
-      this.refs.listview.scrollTo({ x:0, y, animated: true });
+      this.listview.scrollTo({ x:0, y, animated: true });
     } else {
-      UIManager.measureLayout(this.cellTagMap[section], ReactNative.findNodeHandle(this.refs.listview), () => {}, (x, y, w, h) => {
+      UIManager.measureLayout(this.cellTagMap[section], ReactNative.findNodeHandle(this.listview), () => {}, (x, y, w, h) => {
         y = y - this.props.sectionHeaderHeight;
-        this.refs.listview.scrollTo({ x:0, y, animated: true });
+        this.listview.scrollTo({ x:0, y, animated: true });
       });
     }
 
@@ -255,9 +255,9 @@ export default class SelectableSectionsListView extends Component {
     props.style = void 0;
 
     return (
-      <View ref="view" style={[styles.container, this.props.style]}>
+      <View ref={view => this.view = view} style={[styles.container, this.props.style]}>
         <ListView
-          ref="listview"
+          ref={listview => this.listview = listview}
           refreshControl={refreshControl}
           {...props}
         />

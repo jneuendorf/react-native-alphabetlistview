@@ -1,22 +1,22 @@
 'use strict';
 
 import React, {
-  Component,
-  PropTypes
-} from 'react';
+  Component
+} from 'react'
+import PropTypes from 'prop-types'
 import ReactNative, {
-  StyleSheet,
+  // StyleSheet,
   View,
   Text,
-  NativeModules
-} from 'react-native';
+  // NativeModules
+} from 'react-native'
 
-const { UIManager } = NativeModules;
+// const { UIManager } = NativeModules;
 
 export default class SectionHeader extends Component {
 
   componentDidMount() {
-    this.props.updateTag && this.props.updateTag(ReactNative.findNodeHandle(this.refs.view), this.props.sectionId);
+    this.props.updateTag && this.props.updateTag(ReactNative.findNodeHandle(this.view), this.props.sectionId);
   }
 
   render() {
@@ -26,26 +26,26 @@ export default class SectionHeader extends Component {
       <Text>{this.props.title}</Text>;
 
     return (
-      <View ref="view">
+      <View ref={view => this.view = view}>
         {content}
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor:'#f8f8f8',
-    borderTopWidth: 1,
-    borderTopColor: '#ececec'
-  },
-  text: {
-    fontWeight: '700',
-    paddingTop:2,
-    paddingBottom:2,
-    paddingLeft: 2
-  }
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     backgroundColor:'#f8f8f8',
+//     borderTopWidth: 1,
+//     borderTopColor: '#ececec'
+//   },
+//   text: {
+//     fontWeight: '700',
+//     paddingTop:2,
+//     paddingBottom:2,
+//     paddingLeft: 2
+//   }
+// });
 
 SectionHeader.propTypes = {
 

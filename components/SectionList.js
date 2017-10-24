@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import {StyleSheet, View, Text} from 'react-native'
 
 
@@ -39,7 +40,7 @@ export default class SectionList extends Component {
     }
 
     fixSectionItemMeasure() {
-        const sectionItem = this.refs.sectionItem0
+        const sectionItem = this.sectionItem0
         if (!sectionItem) {
             return
         }
@@ -84,7 +85,7 @@ export default class SectionList extends Component {
                 </View>
 
             return (
-                <View key={index} ref={'sectionItem' + index} pointerEvents="none">
+                <View key={index} ref={item => this['sectionItem' + index] = item} pointerEvents="none">
                     {child}
                 </View>
             )
@@ -92,7 +93,7 @@ export default class SectionList extends Component {
 
         return (
             <View
-                ref="view"
+                ref={view => this.view = view}
                 style={[styles.container, this.props.style]}
                 onStartShouldSetResponder={returnTrue}
                 onMoveShouldSetResponder={returnTrue}
